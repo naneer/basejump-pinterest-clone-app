@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', [ '$scope', '$location', 'Auth', '$window', function ($scope, $location, Auth, $window) {
     $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
+      'title': '',
+      'link': ''
     }];
 
     $scope.isCollapsed = true;
@@ -14,10 +14,14 @@ angular.module('workspaceApp')
 
     $scope.logout = function() {
       Auth.logout();
-      $location.path('/login');
+      $location.path('/');
     };
 
     $scope.isActive = function(route) {
       return route === $location.path();
     };
-  });
+    
+    $scope.loginOauth = function(provider) {
+      $window.location.href = '/auth/' + provider;
+    };
+  }]);
