@@ -2,9 +2,9 @@
 
 angular.module('workspaceApp')
   .factory('Imgwr', [ '$resource', function ($resource) {
-    return $resource('/api/things/:id/:user_id', {
+    return $resource('/api/things/:id/:uid', {
       id: '@id',
-      username: '@username'
+      uid: '@uid'
     }, {
       getByUserId: {
         method: 'GET',

@@ -3,10 +3,10 @@
 angular.module('workspaceApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('main', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl',
+      .state('imgwrs', {
+        url: '/imgwrs/:id',
+        templateUrl: 'app/imgwrs/imgwrs.html',
+        controller: 'ImgwrsCtrl',
         controllerAs: 'ctrl'
       });
   });

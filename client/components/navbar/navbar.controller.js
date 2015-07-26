@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('NavbarCtrl', [ '$scope', '$location', 'Auth', '$window', function ($scope, $location, Auth, $window) {
+  .controller('NavbarCtrl', [ '$scope', '$location', 'Auth', '$window', '$modal', function ($scope, $location, Auth, $window, $modal) {
     $scope.menu = [{
       'title': '',
       'link': ''
@@ -23,5 +23,15 @@ angular.module('workspaceApp')
     
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
+    };
+    
+    $scope.imgwrNew = function() {
+          var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'components/re-pint/re-pint.new.modal/re-pint.new.modal.html',
+            controller: 'RePintNewModalCtrl',
+            controllerAs: 'newModalCtrl',
+            size: 'sm'
+          });
     };
   }]);

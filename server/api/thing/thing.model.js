@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 var ThingSchema = new Schema({
   url: String,
-  likes: Number,
+  caption: String,
   active: { type: Boolean, default: true },
   _owner: { type: Schema.Types.ObjectId, ref: 'User' }
 });

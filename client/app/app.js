@@ -43,16 +43,6 @@ angular.module('workspaceApp', [
           $cookieStore.remove('token');
           return $q.reject(response);
         }
-        else if(response.status === 404) {
-          if(response.data === "User Not Found") {
-            $location.path('/error/usernotfound');
-            return $q.reject(response);
-          }
-          else {
-            $location.path('/error/pagenotfound');
-            return $q.reject(response);
-          }
-        }
         else {
           return $q.reject(response);
         }
