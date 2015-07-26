@@ -9,8 +9,16 @@ angular.module('workspaceApp', [
   'ui.bootstrap'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    $urlRouterProvider.rule(function($injector, $location){
+      var path = $location.path();
+      
+      // Remove trailing slashes from path
+      if(path !== '/' && path.slice(-1) === '/'){
+        $location.replace().path(path.slice(0, -1));
+      }
+    });
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/error/pagenotfound');
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
@@ -30,10 +38,20 @@ angular.module('workspaceApp', [
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if(response.status === 401) {
-          $location.path('/login');
+          $location.path('/');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
+        }
+        else if(response.status === 404) {
+          if(response.data === "User Not Found") {
+            $location.path('/error/usernotfound');
+            return $q.reject(response);
+          }
+          else {
+            $location.path('/error/pagenotfound');
+            return $q.reject(response);
+          }
         }
         else {
           return $q.reject(response);

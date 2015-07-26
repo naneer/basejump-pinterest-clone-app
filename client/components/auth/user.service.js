@@ -17,6 +17,9 @@ angular.module('workspaceApp')
         params: {
           id:'me'
         }
+      },
+      getByUsername: {
+        method: 'GET'
       }
 	  });
   });
