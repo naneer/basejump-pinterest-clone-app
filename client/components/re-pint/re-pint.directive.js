@@ -13,8 +13,8 @@ angular.module('workspaceApp')
         items: '='
       },
       link: function (scope, element, attrs, pint) {
-        pint.currentUserId = Auth.getCurrentUser()._id;
-        pint.state = $state.$current.name;
+/*        pint.currentUserId = Auth.getCurrentUser()._id;
+        pint.state = $state.$current.name;*/
         var grid = element[0];
         var msnry = new Masonry( grid, {
           columnWidth: '.grid-sizer',
@@ -32,7 +32,7 @@ angular.module('workspaceApp')
           });
         });
         
-        pint.open = function(item, event){
+/*        pint.open = function(item, event){
           var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'components/re-pint/re-pint.modal/re-pint.modal.html',
@@ -52,7 +52,7 @@ angular.module('workspaceApp')
               msnry.layout();
             }
           });          
-        };
+        };*/
 
       }
     };
