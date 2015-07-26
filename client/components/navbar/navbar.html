@@ -11,9 +11,9 @@
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+<!--        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
+        </li>-->
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
 
@@ -24,11 +24,16 @@
           </a>
         </li>
         <li ng-show="isLoggedIn()" class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ getCurrentUser().username }} <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+               {{ getCurrentUser().username }} <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li ng-show="isLoggedIn()" ng-class="{active: isActive()}"><a ui-sref="main.account({username: getCurrentUser().username})"><i class="fa fa-list"></i> my wall</a></li>
             <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><i class="fa fa-sign-out"></i> logout</a></li>
           </ul>
+        </li>
+        <li ng-show="isLoggedIn()" class="hidden-xs">
+          <img ng-src="{{getCurrentUser().avatar}}" class="img-circle img-responsive"/>
         </li>
       </ul>
 
