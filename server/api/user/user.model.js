@@ -9,6 +9,7 @@ var UserSchema = new Schema({
   name: String,
   username: String,
   email: { type: String, lowercase: true },
+  avatar: String,
   role: {
     type: String,
     default: 'user'
@@ -41,7 +42,8 @@ UserSchema
     return {
       'name': this.name,
       'role': this.role,
-      '_id': this._id
+      '_id': this._id,
+      'avatar': this.avatar
     };
   });
 

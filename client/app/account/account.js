@@ -7,19 +7,14 @@ angular.module('workspaceApp')
         url: ':username',
         templateUrl: 'app/account/account.html',
         controller: 'AccountCtrl',
+        controllerAs: 'ctrl',
+        onEnter: function(user) {
+        },
         resolve: {
           user: [
             'User', '$stateParams',
             function(User, $stateParams){
-              var query = User.getByUsername({id: $stateParams.username}).$promise;
-              query.then(function(result){
-                      console.log(result);
-                      return result;
-                    })
-                    .catch(function(error){
-                      console.error("ERROR", error);
-                      return error;
-                    });
+              return User.getByUsername({id: $stateParams.username});
             }
           ]
         }

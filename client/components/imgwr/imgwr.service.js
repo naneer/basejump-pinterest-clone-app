@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .factory('imgwr', [ '$resource', function ($resource) {
-    return $resource('/things/:id/:username', {
+  .factory('Imgwr', [ '$resource', function ($resource) {
+    return $resource('/api/things/:id/:user_id', {
       id: '@id',
       username: '@username'
     }, {
-      getByUser: {
+      getByUserId: {
         method: 'GET',
         isArray: true,
         params: {
