@@ -11,9 +11,7 @@
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-<!--        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>-->
+
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
 
@@ -29,7 +27,7 @@
                {{ getCurrentUser().username }} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li ng-show="isLoggedIn()" ng-class=""><a ui-sref="main.account({username: getCurrentUser().username})"><i class="fa fa-list"></i> my wall</a></li>
+            <li ng-show="isLoggedIn()" ng-class="{active: isActive('/users/' + getCurrentUser().username)}"><a ui-sref="main.account({username: getCurrentUser().username})"><i class="fa fa-list"></i> my wall</a></li>
             <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><i class="fa fa-sign-out"></i> logout</a></li>
           </ul>
         </li>

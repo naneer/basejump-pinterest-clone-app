@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('AccountCtrl', [ 'Imgwr', 'user', function (Imgwr, user) {
+  .controller('IndexCtrl', [  'Imgwr', function (Imgwr) {
     var ctrl = this;
-    var result = Imgwr.getByUserId({uid: user._id}).$promise;
+    var result = Imgwr.query().$promise;
     result.then(function(content){
       ctrl.content = content;
     });
-
   }]);

@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     timestamps = require('mongoose-timestamps');
 
 var ThingSchema = new Schema({
-  url: String,
+  url: { type: String, default: "/assets/images/page-not-found.png" },
   caption: String,
   active: { type: Boolean, default: true },
   _owner: { type: Schema.Types.ObjectId, ref: 'User' }

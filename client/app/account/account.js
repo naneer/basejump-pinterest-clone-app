@@ -4,7 +4,7 @@ angular.module('workspaceApp')
   .config([ '$stateProvider', function ($stateProvider) {
     $stateProvider
       .state('main.account', {
-        url: ':username',
+        url: 'users/:username',
         templateUrl: 'app/account/account.html',
         controller: 'AccountCtrl',
         controllerAs: 'ctrl',

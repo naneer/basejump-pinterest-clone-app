@@ -1,1 +1,24 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-10">
+            <h3 class="text-center">{{ ctrl.imgwr.caption }}</h3>
+            <img class="center-block imgload img-responsive" ng-src="{{ ctrl.imgwr.url }}" />
+        </div>
+        <div class="col-xs-12 col-sm-2">
+            <div ng-if="ctrl.delete">
+                Your Options: 
+                <button type="button" class="btn btn-default btn-block" ng-click="ctrl.delete()">Delete</button>    
+            </div>
+            <div ng-if="!ctrl.delete">
+                Linked By: 
+                <a class="btn btn-link" ui-sref="main.account({ username: ctrl.imgwr._owner.username })">
+                    {{ ctrl.imgwr._owner.username }}
+                    <img ng-src="{{ ctrl.imgwr._owner.avatar }}" class="img-circle">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

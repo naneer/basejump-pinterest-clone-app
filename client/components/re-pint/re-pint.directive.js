@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .directive('rePint', [ '$modal', 'Auth', '$state', function ($modal, Auth, $state) {
+  .directive('rePint', [ '$window', '$modal', 'Auth', '$state', 'Imgwr', function ($window, $modal, Auth, $state, Imgwr) {
     return {
       templateUrl: 'components/re-pint/re-pint.html',
       restrict: 'E',
@@ -13,47 +13,60 @@ angular.module('workspaceApp')
         items: '='
       },
       link: function (scope, element, attrs, pint) {
-/*        pint.currentUserId = Auth.getCurrentUser()._id;
-        pint.state = $state.$current.name;*/
         var grid = element[0];
-        var msnry = new Masonry( grid, {
-          columnWidth: '.grid-sizer',
-          itemSelector: '.grid-item'
+        var iso = new Isotope( grid, {
+          itemSelector: '.grid-item',
+          layoutMode: 'masonry',
+          masonry: {
+            columnWidth: '.grid-sizer',
+            percentPosition: true
+          },
+          getSortData: {
+            created_at: function(itemElem){
+              return $( itemElem ).find('time').attr('data-time');
+            }
+          },
+          sortBy: 'created_at',
+          sortAscending: false
         });
         scope.$watchCollection('pint.items', function(n, o) {
           if(n === undefined) { return; }
-
-          msnry.layout();
           var imgLd = imagesLoaded(grid.getElementsByClassName('hidden'));
           imgLd.on('progress', function(instance, image){
+            if(!image.isLoaded){
+              image.img.src = "/assets/images/page-not-found.png";
+            }
             var item = $(image.img).parents('.grid-item');
             item.removeClass('hidden');
-            msnry.appended( item );
+            iso.insert(item);
           });
         });
-        
-/*        pint.open = function(item, event){
-          var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'components/re-pint/re-pint.modal/re-pint.modal.html',
-            controller: 'RePintModalCtrl',
-            controllerAs: 'modalctrl',
-            size: 'sm',
-            resolve: {
-              selectedItem: function(){
-                return item;
-              }
+        pint.load = function(){
+          console.log("load");
+          var query = Imgwr.query({ offset: pint.items.length }).$promise;
+          query.then(function(result){
+            for(var i = 0; i < result.length; i++){
+              pint.items.push(result[i]);
             }
           });
-          modalInstance.result.then(function (result) {
-            if(result === 'delete'){
-              var item = $(event.target).parents('.grid-item');
-              msnry.remove(item);
-              msnry.layout();
-            }
-          });          
-        };*/
+        };
 
+        angular.element($window).bind("scroll", function() {
+            var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+            var body = document.body, html = document.documentElement;
+            var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+            var windowBottom = windowHeight + window.pageYOffset;
+
+            if (windowBottom >= docHeight) {
+                pint.load();
+            }
+        });
+          scope.$on('$destroy', function() {
+            console.log("destroy");
+            angular.element($window).unbind();
+          });
+
+    
       }
     };
   }]);

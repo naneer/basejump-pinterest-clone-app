@@ -5,7 +5,6 @@ angular.module('workspaceApp')
   function ($timeout, $state, $modalInstance, Imgwr) {
     var newModalCtrl = this;
     newModalCtrl.imgwr = {
-      url: "",
       caption: ""
     };
     newModalCtrl.close = function(){

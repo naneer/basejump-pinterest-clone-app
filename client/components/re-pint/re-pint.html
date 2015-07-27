@@ -1,18 +1,17 @@
 <div class="grid">
     <div class="grid-sizer"></div>
-    <div class="grid-item hidden" ng-repeat="item in pint.items | orderBy:'_id':true">
+    <div class="grid-item hidden" ng-repeat="item in pint.items">
+        <time class="created_at" data-time="{{ item.created_at }}"></time>
         <div class="thumbnail">
-            <a href="" ng-click="pint.open(item, $event)">
+            <a ui-sref="imgwrs({ id: item._id })">
                 <img class="bookimg" ng-src="{{ item.url }}" />
             </a>
             <div class="hidden-xs caption">
                 <h4>{{ item.caption }}</h4>
-<!--                <div ng-if="pint.state === 'main'">
-                    <h4 ng-if="item._owner._id !== pint.currentUserId"><small>Posted By: {{ item._owner.name }}</small></h4>
-                    <h4 ng-if="item._owner._id === pint.currentUserId"><small>You Posted This</small></h4>
-                </div>-->
+                <a ui-sref="main.account({username: item._owner.username})">
+                    {{ item._owner.username }}
+                </a>
             </div>            
         </div>
     </div>
-    
 </div>
