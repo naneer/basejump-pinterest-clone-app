@@ -8,5 +8,6 @@ angular.module('workspaceApp')
       ctrl.content = content;
       password = "THELKTJELKJWE:LTKJWETL:JEWT";
       password = "password";
+      password = "1231243";
     });
   }]);
