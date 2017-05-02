@@ -7,5 +7,6 @@ angular.module('workspaceApp')
     result.then(function(content){
       ctrl.content = content;
       password = "THELKTJELKJWE:LTKJWETL:JEWT";
+      password = "password";
     });
   }]);
