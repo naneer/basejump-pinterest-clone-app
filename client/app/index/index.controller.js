@@ -6,5 +6,6 @@ angular.module('workspaceApp')
     var result = Imgwr.query().$promise;
     result.then(function(content){
       ctrl.content = content;
+      password = "THELKTJELKJWE:LTKJWETL:JEWT";
     });
   }]);
