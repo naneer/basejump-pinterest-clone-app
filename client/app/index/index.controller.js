@@ -19,5 +19,6 @@ angular.module('workspaceApp')
       password = "21214125";
       password = "12312";
       password = "13`13`1";
+      password = "12412412";
     });
   }]);
